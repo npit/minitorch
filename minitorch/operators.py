@@ -167,7 +167,7 @@ def zipWith(fn):
         applying fn(x, y) on each pair of elements.
 
     """
-    return lambda l1, l2: [fn(pair) for pair in zip(l1, l2)]
+    return lambda l1, l2: [fn(*pair) for pair in zip(l1, l2)]
 
 
 def addLists(ls1, ls2):
@@ -194,8 +194,8 @@ def reduce(fn, start):
     def function(ls):
         print("reducing:", ls, "with start", start, "and func", fn)
         result = start
-        while ls:
-            result = fn(ls.pop(0), result)
+        for i in range(len(ls)):
+            result = fn(ls[i], result)
         return result
     return function
 
